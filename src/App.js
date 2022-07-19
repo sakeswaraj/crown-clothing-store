@@ -1,7 +1,10 @@
+import MenuDirectory from "./components/menu-directory/MenuDirectory";
+import { categories } from "./utils/ArrayList";
+
 function App() {
   return (
     <div>
-      <h1>hello world</h1>
+      <MenuDirectory categories={categories} />
     </div>
   );
 }
