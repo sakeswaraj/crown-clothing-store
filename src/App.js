@@ -1,10 +1,14 @@
-import MenuDirectory from "./components/menu-directory/MenuDirectory";
-import { categories } from "./utils/ArrayList";
-
+import { Route, Routes } from "react-router-dom";
+import Home from "./routes/home/Home";
+import Navigation from "./routes/navigation/Navigation";
 function App() {
   return (
     <div>
-      <MenuDirectory categories={categories} />
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
