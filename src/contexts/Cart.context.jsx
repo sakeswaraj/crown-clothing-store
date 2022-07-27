@@ -1,7 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const addCartItem = (cartItems, productToAdd, operation) => {
-    console.log("cartItems", cartItems, "productToAdd", productToAdd);
+
     //check whether the added product is already in the cart
     const existingCartItem = cartItems.find(
         (cartItem) => cartItem.id === productToAdd.id
@@ -10,9 +10,7 @@ export const addCartItem = (cartItems, productToAdd, operation) => {
     if (existingCartItem) {
         return cartItems.map((cartItem) =>
             cartItem.id === productToAdd.id
-                ? operation === "add"
-                    ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                    : { ...cartItem, quantity: cartItem.quantity - 1 }
+                ? { ...cartItem, quantity: cartItem.quantity + 1 }
                 : cartItem
         );
     }
@@ -24,15 +22,23 @@ export const CartContext = createContext({
     setCartState: () => null,
     cartItems: [],
     addItemToCart: () => { },
+    cardCount: 0
 });
 
 export const CartProvider = ({ children }) => {
     const [cartState, setCartState] = useState(false);
-    const [cartItem, setCartItem] = useState([]);
-
+    const [cartItems, setCartItems] = useState([]);
+    const [cardCount, setCardCount] = useState(0)
     const addItemToCart = (product, operation) =>
-        setCartItem(addCartItem(cartItem, product, operation));
+        setCartItems(addCartItem(cartItems, product, operation));
 
-    const value = { cartState, setCartState, cartItem, addItemToCart };
+    const value = { cartState, setCartState, cartItems, addItemToCart, cardCount };
+
+    useEffect(() => {
+        console.log("cartItems", cartItems);
+        const totlaCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+        setCardCount(totlaCartItems)
+    }, [cartItems])
+
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
