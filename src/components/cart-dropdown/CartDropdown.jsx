@@ -5,12 +5,12 @@ import CartItem from '../cart-item/CartItem';
 import "./CardDropdown.scss";
 
 function CartDropdown() {
-    const { cartItem } = useContext(CartContext);
+    const { cartItems } = useContext(CartContext);
     return (
         <div className='cart-dropdown-container'>
             <div className='cart-items' >
-                {cartItem.length ? (
-                    cartItem.map((cartItem) => (
+                {cartItems.length ? (
+                    cartItems.map((cartItem) => (
                         <CartItem key={cartItem.id} cartItem={cartItem} />
                     ))
                 ) : (
