@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Authentication, Home, Navigation, Shop } from "./routes";
+import Checkout from "./routes/checkout/Checkout";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="sign-in" element={<Authentication />} />
           <Route path="shop" element={<Shop />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </div>
