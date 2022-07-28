@@ -4,7 +4,7 @@ import { CartContext } from '../../contexts/Cart.context';
 import "./Cart.scss";
 
 function Cart() {
-    const { cartState, setCartState, cardCount } = useContext(CartContext)
+    const { setCartState, cardCount } = useContext(CartContext)
 
     const onClickHandler = () => {
         setCartState(prev => !prev)
