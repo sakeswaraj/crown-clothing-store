@@ -53,7 +53,16 @@ function SignUpForm() {
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
     };
+    const handleSignUp = async () => {
 
+        const { user } = await createAuthUserWithEmailAndPassword(
+            email,
+            password
+        );
+        console.log("user", user)
+        await createUserDocumentFromAuth(user, { displayName });
+        resetFormFields();
+    }
     return (
         <div className='sign-up-container'>
             <h2>Don't have an account?</h2>
@@ -94,7 +103,7 @@ function SignUpForm() {
                     name='confirmPassword'
                     value={confirmPassword}
                 />
-                <Button type='submit'>Sign Up</Button>
+                <Button type='submit' buttonType='inverted' onClick={handleSignUp}>Sign Up</Button>
             </form>
         </div>
     )
