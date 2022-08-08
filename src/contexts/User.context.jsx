@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
     const value = { currentUser, setCurrentUser }
     useEffect(() => {
         const unsubscribe = onAuthChangeHandler((data) => {
+            console.log("dara", data)
             setCurrentUser(data)
         })
         return unsubscribe;
