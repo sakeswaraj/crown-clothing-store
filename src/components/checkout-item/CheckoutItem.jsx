@@ -1,15 +1,22 @@
 import React, { useContext } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { CartContext } from '../../contexts/Cart.context';
 import "./CheckoutItem.scss";
 
 function CheckoutItem({ cartItem }) {
     const { name, imageUrl, price, quantity } = cartItem;
 
+    const notify = () => toast(`${name} cleared successfully from cart`);
+
     const { addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext)
 
     const addItemHandler = () => addItemToCart(cartItem);
     const removeItemHandler = () => removeItemFromCart(cartItem);
-    const clearItemHandler = () => clearItemFromCart(cartItem);
+    const clearItemHandler = () => {
+        notify()
+        clearItemFromCart(cartItem)
+    };
     return (
         <div className='checkout-item-container'>
             <div className='image-container'>
@@ -29,6 +36,15 @@ function CheckoutItem({ cartItem }) {
             <div className='remove-button' onClick={clearItemHandler}>
                 &#10005;
             </div>
+            <ToastContainer position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </div>
     )
 }

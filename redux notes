@@ -1,0 +1,15 @@
+import { PartyMode } from "@mui/icons-material"
+
+there is only one dispatch function from "usedispatch()" hook
+and for every actoin dispatched all the reducers are run
+
+action{type:abc,payload:value}------>>>>> dispatched(fired)---->>MIDDLEWARE----->>root reducers--all the reducers
+----->update state
+
+that us whys in useEffect , adding of dispatch as dependency is not good
+
+whenever any action fires and as long as the reducer updates,it does not matter which Part of
+reducer u r listening to,every single component that has useSelector will re-run
+
+middlewares sit in between cpmponents and reducers (after action dispatch) before reducer 
+
